@@ -23,17 +23,21 @@ o_path='/scratch/rx32940/bwa_results'
 # index the reference
 bwa index $seq_path/Lai_56601.fasta
 
-# align the contigs to reference 
-bwa mem -t2 $seq_path/Lai_56601.fasta $seq_path/JQPC01.fasta > $o_path/JQPC01.sam
-# -o output, convert to binary, bam, format
-samtools sort -o $o_path/JQPC01.bam $o_path/JQPC01.sam
-#index the alignment file
-samtools index $o_path/JQPC01.bam
-# producing genotype likelihoods in VCF or BCF format
-bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/JQPC01.bam > $o_path/JQPC01.bcf
-bcftools call -mv -Ob $o_path/JQPC01.bcf > $o_path/JQPC01_final.bcf
-bcftools view -i '%QUAL>=20' $o_path/JQPC01_final.bcf > $o_path/JQPC01_final.vcf
-
+for file in $seq_path; do
+    if [$file != "Lai_56601.fasta"]
+    then
+        # align the contigs to reference 
+        bwa mem -t2 $seq_path/Lai_56601.fasta $seq_path/$file.fasta > $o_path/$file.sam
+        # -o output, convert to binary, bam, format
+        samtools sort -o $o_path/$file.bam $o_path/$file.sam
+        #index the alignment file
+        samtools index $o_path/$file.bam
+        # producing genotype likelihoods in VCF or BCF format
+        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/$file.bam > $o_path/$file.bcf
+        bcftools call -mv -Ob $o_path/$file.bcf > $o_path/${file}_final.bcf
+        bcftools view -i '%QUAL>=20' $o_path/${file}_final.bcf > $o_path/${file}_final.vcf
+    fi
+done
 
 
 
