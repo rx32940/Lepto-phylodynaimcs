@@ -16,10 +16,8 @@ module load BWA/0.7.15-foss-2016b
 module load SAMtools/1.9-foss-2016b
 module load BCFtools/1.9-foss-2016b 
 
-
 seq_path='/scratch/rx32940/lepto_wgs_seq'# lead all output file to this folder
 o_path='/scratch/rx32940/bwa_results'
-
 
 for file in $seq_path; do
     echo "in loop"
@@ -28,7 +26,7 @@ for file in $seq_path; do
     then
         echo "in if"
         # index the reference
-        echo $seq_path
+        echo $seq
         bwa index $seq_path/Lai_56601.fasta
         # align the contigs to reference 
         bwa mem -t2 $seq_path/Lai_56601.fasta $seq_path/$file.fasta > $o_path/$file.sam
