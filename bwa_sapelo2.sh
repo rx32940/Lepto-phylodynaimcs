@@ -24,21 +24,23 @@ o_path='/scratch/rx32940/bwa_results'
 for file in $seq_path/*.fasta; do
     echo "in loop"
     echo $file
-    if [ "$ref" != "/scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta" ]; then
+    isolate=$(echo $file | awk -F'[/.]' '{print $4}')
+    echo $isolate
+    if [ "$isolate" != "Lai_56601" ]; then
         echo "in if"
         # index the reference
         echo $seq
         bwa index $seq_path/Lai_56601.fasta
         # align the contigs to reference 
-        bwa mem -t2 $seq_path/Lai_56601.fasta $seq_path/$file.fasta > $o_path/$file.sam
+        bwa mem -t2 $seq_path/Lai_56601.fasta $file.fasta > $o_path/$isolate.sam
         # -o output, convert to binary, bam, format
-        samtools sort -o $o_path/$file.bam $o_path/$file.sam
+        samtools sort -o $o_path/$isolate.bam $o_path/$isolate.sam
         #index the alignment file
-        samtools index $o_path/$file.bam
+        samtools index $o_path/$isolate.bam
         # producing genotype likelihoods in VCF or BCF format
-        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/$file.bam > $o_path/$file.bcf
-        bcftools call -mv -Ob $o_path/$file.bcf > $o_path/${file}_final.bcf
-        bcftools view -i '%QUAL>=20' $o_path/${file}_final.bcf > $o_path/${file}_final.vcf
+        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/$isolate.bam > $o_path/$isolate.bcf
+        bcftools call -mv -Ob $o_path/$isolate.bcf > $o_path/${isolate}_final.bcf
+        bcftools view -i '%QUAL>=20' $o_path/${isolate}_final.bcf > $o_path/${isolate}_final.vcf
     fi
 done
 
