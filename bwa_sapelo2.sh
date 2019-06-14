@@ -18,13 +18,10 @@ module load BCFtools/1.9-foss-2016b
 
 
 seq_path='/scratch/rx32940/lepto_wgs_seq'
-echo $seq_path
-echo "seq"
 o_path='/scratch/rx32940/bwa_results'
-echo $o_path
-echo "o"
 
-for file in $seq_path; do
+
+for file in $seq_path/*.fasta; do
     echo "in loop"
     echo $file
     if [$file != "Lai_56601.fasta"]
