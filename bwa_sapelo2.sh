@@ -17,7 +17,11 @@ module load SAMtools/1.9-foss-2016b
 module load BCFtools/1.9-foss-2016b 
 
 seq_path='/scratch/rx32940/lepto_wgs_seq'# lead all output file to this folder
+echo $seq_path
+echo "seq"
 o_path='/scratch/rx32940/bwa_results'
+echo $o_path
+echo "o"
 
 for file in $seq_path; do
     echo "in loop"
