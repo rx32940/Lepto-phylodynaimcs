@@ -47,5 +47,5 @@ for file in $seq_path/*.fasta; do
     fi
 done
 
-
+time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MergeVcfs I=$o_path/vcf_list.list O=$o_path/vcf_all.vcf.gz
 
