@@ -43,7 +43,7 @@ for file in $seq_path/*.fasta; do
         bcftools call -mv -Ob $o_path/$isolate.bcf > $o_path/${isolate}_final.bcf
         # filter those with quality score less than 20
         bcftools view -i '%QUAL>=20' $o_path/${isolate}_final.bcf > $o_path/${isolate}_final.vcf
-        echo "$o_path/${isolate}_final.vcf \n" >> $o_path/vcf_list.list
+        echo "$o_path/${isolate}_final.vcf" >> $o_path/vcf_list.list
     fi
 done
 
