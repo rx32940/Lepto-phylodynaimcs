@@ -21,6 +21,7 @@ seq_path='/scratch/rx32940/lepto_wgs_seq'# lead all output file to this folder
 o_path='/scratch/rx32940/bwa_results'
 
 echo "start index"
+echo $seq_path/Lai_56601.fasta
 # index the reference
 bwa index $seq_path/Lai_56601.fasta
 
