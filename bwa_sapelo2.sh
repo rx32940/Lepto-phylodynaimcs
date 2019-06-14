@@ -26,7 +26,7 @@ bwa index $seq_path/Lai_56601.fasta
 for file in $seq_path/*.fasta; do
     echo "in loop"
     echo $file
-    isolate=$(echo $file | awk -F'[/.]' '{print $4}')
+    isolate=$(echo $file | awk -F'[/.]' '{print $5}')
     echo $isolate
     if [ "$isolate" != "Lai_56601" ]; then
         echo "in if"
