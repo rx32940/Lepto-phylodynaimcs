@@ -24,7 +24,7 @@ o_path='/scratch/rx32940/bwa_results'
 for file in $seq_path/*.fasta; do
     echo "in loop"
     echo $file
-    if ["$ref" != "/scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta"]; then
+    if [ "$ref" != "/scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta" ]; then
         echo "in if"
         # index the reference
         echo $seq
