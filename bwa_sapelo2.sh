@@ -35,7 +35,7 @@ for file in $seq_path/*.fasta; do
         bwa mem -t2 $seq_path/Lai_56601.fasta $seq_path/$isolate.fasta > $o_path/$isolate.sam
         # -o output, convert to binary, bam, format
         samtools sort -o $o_path/$isolate.bam $o_path/$isolate.sam
-        time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MarkDuplicates I=$o_path/$isolate.bam O=$o_path/${isolate}_marked_dup.bam M=${isolate}_md_metrics.txt
+        time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MarkDuplicates I=$o_path/$isolate.bam O=$o_path/${isolate}_marked_dup.bam M=$o_path/${isolate}_md_metrics.txt
         #index the alignment file (bam)
         samtools index $o_path/${isolate}_marked_dup.bam
         # producing genotype likelihoods in VCF or BCF format
