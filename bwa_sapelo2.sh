@@ -21,6 +21,8 @@ module load picard/2.16.0-Java-1.8.0_144
 seq_path='/scratch/rx32940/lepto_wgs_seq'
 o_path='/scratch/rx32940/bwa_results'
 
+bam_files
+
 # index the reference
 bwa index $seq_path/Lai_56601.fasta
 for file in $seq_path/*.fasta; do
@@ -38,14 +40,18 @@ for file in $seq_path/*.fasta; do
         #index the alignment file (bam)
         samtools index $o_path/${isolate}_marked_dup.bam
         # producing genotype likelihoods in VCF or BCF format
-        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/${isolate}_marked_dup.bam > $o_path/$isolate.bcf
-        #call snps
-        bcftools call -mv -Ob $o_path/$isolate.bcf > $o_path/${isolate}_final.bcf
-        # filter those with quality score less than 20
-        bcftools view -i '%QUAL>=20' $o_path/${isolate}_final.bcf > $o_path/${isolate}_final.vcf
-        echo "$o_path/${isolate}_final.vcf" >> $o_path/vcf_list.list
+        echo "$o_path/${isolate}_marked_dup.bam" >> $o_path/bam_list.list
     fi
 done
+        
+        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/bam_list.bam > $o_path/multisample.bcf
+        #call snps
+        bcftools call -mv -Ob $o_path/multisample.bcf > $o_path/multisample_final.bcf
+        # filter those with quality score less than 20
+        bcftools view -i '%QUAL>=20' $o_path/multisample_final.bcf > $o_path/multisample_final.vcf
+        
+    
+
 
 time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MergeVcfs I=$o_path/vcf_list.list O=$o_path/vcf_all.vcf.gz
 
