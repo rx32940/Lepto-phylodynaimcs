@@ -44,7 +44,7 @@ for file in $seq_path/*.fasta; do
 done
         
         # mpile up the bam lists
-        bcftools mpileup -Ou -f -b $seq_path/Lai_56601.fasta bam_list.list > $o_path/multisample.bcf
+        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta bam_list.list > $o_path/multisample.bcf
         #call snps
         bcftools call -mv -Ob $o_path/multisample.bcf > $o_path/multisample_final.bcf
         # filter those with quality score less than 20
