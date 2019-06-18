@@ -23,6 +23,8 @@ o_path='/scratch/rx32940/bwa_results' # path to output files
 
 # index the reference
 bwa index $seq_path/Lai_56601.fasta
+
+# align to reference indiviually
 for file in $seq_path/*.fasta; do
     echo "in loop"
     echo $file
@@ -42,6 +44,8 @@ for file in $seq_path/*.fasta; do
         echo "$o_path/${isolate}_marked_dup.bam" >> $o_path/bam_list.list
     fi
 done
+
+# cohort variant calling
         
         # mpile up the bam lists
         bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta -b $o_path/bam_list.list > $o_path/multisample.bcf
