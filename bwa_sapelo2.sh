@@ -21,8 +21,6 @@ module load picard/2.16.0-Java-1.8.0_144
 seq_path='/scratch/rx32940/lepto_wgs_seq'
 o_path='/scratch/rx32940/bwa_results'
 
-bam_files
-
 # index the reference
 bwa index $seq_path/Lai_56601.fasta
 for file in $seq_path/*.fasta; do
@@ -44,7 +42,8 @@ for file in $seq_path/*.fasta; do
     fi
 done
         
-        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/bam_list.bam > $o_path/multisample.bcf
+        # mpile up the bam lists
+        bcftools mpileup -Ou -f $seq_path/Lai_56601.fasta $o_path/bam_list.list > $o_path/multisample.bcf
         #call snps
         bcftools call -mv -Ob $o_path/multisample.bcf > $o_path/multisample_final.bcf
         # filter those with quality score less than 20
@@ -53,5 +52,5 @@ done
     
 
 
-time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MergeVcfs I=$o_path/vcf_list.list O=$o_path/vcf_all.vcf.gz
+
 
