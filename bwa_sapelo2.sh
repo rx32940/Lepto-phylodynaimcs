@@ -52,7 +52,7 @@ done
         #call snps
         bcftools call -mv -Ob $o_path/multisample.bcf > $o_path/multisample_final.bcf
         # filter those with quality score less than 20
-        bcftools view -i '%QUAL>=20' $o_path/multisample_final.bcf > $o_path/multisample_final.vcf
+        bcftools view -i '%QUAL>=100' $o_path/multisample_final.bcf > $o_path/multisample_final.vcf
         
     
 
