@@ -51,9 +51,11 @@ for file in $o_path/*_marked_dup.bam; do
 
     isolate=$(echo $file | awk -F'[/._]' '{print $6}')
     echo $isolate
-
+    # add read group to the bam files because the read groups were missing from the previous bam files. RG tags were randomly came up, unique for each sample
     time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar AddOrReplaceReadGroups I=$file O=$o_path/${isolate}_sorted.bam RGID=$isolate RGLB=WGS RGPL=illumina RGPU=na RGSM=$isolate
-    samtools index $o_path/${isolate}_sorted.bam
+    samtools index $o_path/${isolate}_sorted.bam  #index the new bam file
+    # call intermediate vcf (gvcf) for every isolate prepare for cohort variant calling
     gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $o_path/${isolate}_sorted.bam -O $o_path/$isolate.vcf -ERC GVCF
-
+    echo "$isolate\t$o_path/$isolate.vcf" >> $o_path/cohort.sample_map
+    
 done
