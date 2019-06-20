@@ -47,8 +47,9 @@ done
 # GATK cohort variant calling workflow: https://software.broadinstitute.org/gatk/documentation/article.php?id=3893
 for file in $o_path/*_marked_dup.bam; do
     
-    isolate=$(echo $file | awk -F'[/.]' '{print $5}')
+    isolate=$(echo $file | awk -F'[/._]' '{print $5}')
     echo $isolate
-    gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $file -O $isolate.vcf -ERC GVCF
+    echo "$seq_path/Lai_56601.fasta"
+    gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $file -O $o_path/$isolate.vcf -ERC GVCF
 
 done
