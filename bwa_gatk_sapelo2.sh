@@ -63,4 +63,4 @@ done
 # create a database combine all gvcf files for cohort variant calling, don't know interval
 # gatk GenomicsDBImport --genomicsdb-workspace-path $o_path/vcf_database -L 1 --sample-name-map $o_path/cohort.sample_map
 
-gatk CombineVariants -R $seq_path/Lai_56601.fasta --variant cohort.list -o combined.vcf -genotypeMergeOptions UNIQUIFY
+gatk CombineVariants -R $seq_path/Lai_56601.fasta --variant $o_path/cohort.list -o $o_path/combined.vcf -genotypeMergeOptions UNIQUIFY
