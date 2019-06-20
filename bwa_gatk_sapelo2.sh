@@ -56,6 +56,8 @@ for file in $o_path/*_marked_dup.bam; do
     samtools index $o_path/${isolate}_sorted.bam  #index the new bam file
     # call intermediate vcf (gvcf) for every isolate prepare for cohort variant calling
     gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $o_path/${isolate}_sorted.bam -O $o_path/$isolate.vcf -ERC GVCF
-    echo "$isolate\t$o_path/$isolate.vcf" >> $o_path/cohort.sample_map
-    
+    echo -e "$isolate\t$o_path/$isolate.vcf" >> $o_path/cohort.sample_map # put all sample name and path to vcf in a map file
+
 done
+
+gatk GenomicsDBImport --genomicsdb-workspace-path $o_path/vcf_database -L 1 --sample-name-map $o_path/cohort.sample_map
