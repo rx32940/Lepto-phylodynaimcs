@@ -44,12 +44,13 @@ for file in $seq_path/*.fasta; do
     fi
 done
 
+time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar CreateSequenceDictionary R=$seq_path/Lai_56601.fasta O=$seq_path/Lai_56601.dict
+
 # GATK cohort variant calling workflow: https://software.broadinstitute.org/gatk/documentation/article.php?id=3893
 for file in $o_path/*_marked_dup.bam; do
-    
-    isolate=$(echo $file | awk -F'[/._]' '{print $5}')
+
+    isolate=$(echo $file | awk -F'[/._]' '{print $6}')
     echo $isolate
-    echo "$seq_path/Lai_56601.fasta"
     gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $file -O $o_path/$isolate.vcf -ERC GVCF
 
 done
