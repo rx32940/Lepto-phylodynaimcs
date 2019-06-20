@@ -60,4 +60,5 @@ for file in $o_path/*_marked_dup.bam; do
 
 done
 
-gatk GenomicsDBImport --genomicsdb-workspace-path $o_path/vcf_database -L 1 --sample-name-map $o_path/cohort.sample_map
+# create a database combine all gvcf files for cohort variant calling
+gatk q --genomicsdb-workspace-path $o_path/vcf_database --sample-name-map $o_path/cohort.sample_map
