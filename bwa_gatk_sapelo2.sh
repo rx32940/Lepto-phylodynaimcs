@@ -60,7 +60,11 @@ for file in $o_path/*_marked_dup.bam; do
 
 done
 
-# create a database combine all gvcf files for cohort variant calling, don't know interval
+# create a database combine all gvcf files for cohort variant calling, don't know interval -L, but this is a better method to use
 # gatk GenomicsDBImport --genomicsdb-workspace-path $o_path/vcf_database -L 1 --sample-name-map $o_path/cohort.sample_map
 
-gatk CombineGVCFs -R $seq_path/Lai_56601.fasta --variant $o_path/cohort.list -o $o_path/combined.vcf
+# replacement for GenomicsDBImport, output multisample vcf file instead of an database
+gatk CombineGVCFs -R $seq_path/Lai_56601.fasta --variant $o_path/cohort.list -O $o_path/combined.vcf
+
+# Perform joint genotyping pre-called with HaplotypeCaller
+gatk GenotypeGVCFs -R $seq_path/Lai_56601.fasta -V $o_path/combined.vcf -O $o_path/lepto_multisample.vcf
