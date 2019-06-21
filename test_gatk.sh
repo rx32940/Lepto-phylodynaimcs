@@ -14,4 +14,7 @@ cd $PBS_O_WORKDIR
 
 module load GATK/4.0.11.0-foss-2016b-Python-2.7.14
 
+seq_path='/scratch/rx32940/lepto_wgs_seq' # path to genomes
+o_path='/scratch/rx32940/bwa_results' # path to output files
+
 gatk HaplotypeCaller -R $seq_path/Lai_56601.fasta -I $o_path/JQOL00000000_sorted.bam -O $o_path/JQOL00000000_test.vcf -ERC GVCF
