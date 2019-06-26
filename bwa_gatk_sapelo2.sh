@@ -44,6 +44,7 @@ for file in $seq_path/*.fasta; do
     fi
 done
 
+# create a dict for ref file for gatk usage
 time java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144" -jar  /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar CreateSequenceDictionary R=$seq_path/Lai_56601.fasta O=$seq_path/Lai_56601.dict
 
 # GATK cohort variant calling workflow: https://software.broadinstitute.org/gatk/documentation/article.php?id=3893
