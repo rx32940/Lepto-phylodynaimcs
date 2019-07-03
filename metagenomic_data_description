@@ -1,0 +1,46 @@
+CGWMS181009
+/project/lslab/lab_shared/leptoData/Metagenomics_Analyzed_Results:
+01.Data      03.GenePredict  05.FunctionAnnotation
+02.Assembly  04.Taxonomy     CGWMS181009_Metagenomics_Analysis_Final_Report.pdf
+
+01.Data:
+AllSamples.stat.xlsx  hostclean  rawdata
+
+    hostclean: (folders include dir of samples from different tissues)
+        R22.K  R22.L  R22.S  R26.K  R26.L  R26.S  R27.K  R27.L  R27.S  R28.K  R28.L  R28.S
+        * each dir contains two paired fastq files and two unmatched fastq files (unzipped)
+    rawdata: (folders include dir of samples from different tissues)
+        R22.K  R22.L  R22.S  R26.K  R26.L  R26.S  R27.K  R27.L  R27.S  R28.K  R28.L  R28.S
+        * each folder contains two fastq files. ex. R22.K_1.fq.gz  R22.K_2.fq.gz
+
+02.Assembly:
+NOVO_MIX  R22.L  R26.K  R26.S  R27.L  R28.K  R28.S                        total.scaftigs.stat.info.xls
+R22.K     R22.S  R26.L  R27.K  R27.S  R28.L  total.scafSeq.stat.info.xls
+
+    NOVO_MIX:
+        NOVO_MIX.len.png  NOVO_MIX.len.svg  NOVO_MIX.scafSeq.fa  NOVO_MIX.scaftigs.fa
+    R22.K:
+        R22.K.len.png  R22.K.len.svg  R22.K.scafSeq.fa  R22.K.scaftigs.fa  
+        
+        * scafSeq is the scaffold 
+        * scaftigs: All portions of a final assembly consisting of contiguous sequence, with sequences split at every occurrence of gaps of unknown bases (Ns).
+        * NOVO_MIX.len.png/svg, scaftigs length vs frequency histogram
+
+03.GenePredict
+GenePredict  GeneStat  GeneTable  UniqGenes
+
+    GenePredict:
+        R22.K  R22.L  R22.S  R26.K  R26.L  R26.S  R27.K  R27.L  R27.S  R28.K  R28.L  R28.S
+
+        R22.K:
+            R22.K.CDS.fa  R22.K.CDS.fa.len.png  R22.K.CDS.fa.len.svg  R22.K.CDS.fa.stat.xls  R22.K.protein.fa
+
+            * R22.K.CDS.fa.len.svg: ORF length(nt) vs frequency histogram.  Gene length distribution
+
+
+
+
+
+
+
+
