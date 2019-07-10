@@ -25,7 +25,7 @@ o_path='/scratch/rx32940/bwa_fastq_results' # path to output files
 bwa index /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta
 
 # align to reference indiviually
-for file in $seq_path/*.fastq.gz; do
+for file in $seq_path/*fastq.gz; do
     echo "in loop"
     echo $file
     isolate=$(echo $file | awk -F'[/.]' '{print $7}')
