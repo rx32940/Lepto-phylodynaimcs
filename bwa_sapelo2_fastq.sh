@@ -19,7 +19,7 @@ module load picard/2.16.0-Java-1.8.0_144
 
 
 seq_path='/project/lslab/lab_shared/LeptoFastqSRA/test' # path to genomes
-o_path='/scratch/rx32940/fastq_results' # path to output files
+o_path='/scratch/rx32940/bwa_fastq_results' # path to output files
 
 # index the reference
 bwa index /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta
