@@ -28,7 +28,7 @@ bwa index /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta
 for file in $seq_path/*; do
     echo "in loop"
     echo $file
-    isolate=$(echo $file | awk -F'[/.]' '{print $4}')
+    isolate=$(echo $file | awk -F'[/.]' '{print $5}')
     echo $isolate
         # align the contigs to reference 
         bwa mem -t2 /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta $seq_path/$isolate.fastq.gz > $o_path/$isolate.sam
