@@ -18,17 +18,17 @@ module load BCFtools/1.9-foss-2016b
 module load picard/2.16.0-Java-1.8.0_144 
 
 
-seq_path='/project/lslab/lab_shared/LeptoFastqSRA/test' # path to genomes
+seq_path='/scratch/rx32940/test' # path to genomes
 o_path='/scratch/rx32940/bwa_fastq_results' # path to output files
 
 # index the reference
 bwa index /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta
 
 # align to reference indiviually
-for file in $seq_path; do
+for file in $seq_path/*; do
     echo "in loop"
     echo $file
-    isolate=$(echo $file | awk -F'[/.]' '{print $7}')
+    isolate=$(echo $file | awk -F'[/.]' '{print $4}')
     echo $isolate
         # align the contigs to reference 
         bwa mem -t2 /scratch/rx32940/lepto_wgs_seq/Lai_56601.fasta $seq_path/$isolate.fastq.gz > $o_path/$isolate.sam
